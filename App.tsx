@@ -9,7 +9,16 @@ import CameraComponent from './components/Camera';
 import ChatMessage from './components/ChatMessage';
 
 const App: React.FC = () => {
-  const [apiKey, setApiKey] = useState(process.env.API_KEY || '');
+  // Safe access to process.env for browser environments
+  const getApiKey = () => {
+    try {
+      return (typeof process !== 'undefined' && process.env?.API_KEY) || '';
+    } catch {
+      return '';
+    }
+  };
+
+  const [apiKey, setApiKey] = useState(getApiKey());
   const [messages, setMessages] = useState<Message[]>([]);
   const [mode, setMode] = useState<AppMode>(AppMode.IDLE);
   const [liveState, setLiveState] = useState<LiveConnectionState>({
@@ -38,7 +47,10 @@ const App: React.FC = () => {
   }, []);
 
   const handleStartLive = async () => {
-    if (!apiKey) return alert("API Key missing");
+    if (!apiKey) {
+      alert("API Key is missing. Please ensure process.env.API_KEY is configured.");
+      return;
+    }
     
     setMode(AppMode.LIVE_COACH);
     setLiveState(prev => ({ ...prev, isConnecting: true, error: null }));
@@ -61,8 +73,6 @@ const App: React.FC = () => {
             // For simplicity in this demo, we won't display real-time transcriptions 
             // of what the user says to avoid visual clutter for dyslexic users, 
             // but we WILL display the AI's final responses if they come as text.
-            // (Note: The LiveClient logic mostly handles audio-in/audio-out, 
-            // but if the model sends text parts, we handle them here).
         },
         (volume) => {
             setLiveState(prev => ({ ...prev, volume }));
@@ -104,6 +114,17 @@ const App: React.FC = () => {
           imageUrl: base64
       });
 
+      if (!apiKey) {
+        setIsProcessing(false);
+        addMessage({
+            id: (Date.now() + 1).toString(),
+            role: 'model',
+            text: "I can't see the image because my API key is missing. Please check the settings.",
+            timestamp: new Date()
+        });
+        return;
+      }
+
       const responseText = await generateAnalysis(apiKey, base64, cameraMode);
       
       setIsProcessing(false);
@@ -120,7 +141,10 @@ const App: React.FC = () => {
   };
 
   const openCamera = (targetMode: 'TEXTBOOK' | 'HANDWRITING') => {
-      if (!apiKey) return alert("API Key missing");
+      if (!apiKey) {
+          alert("API Key is missing.");
+          return;
+      }
       setCameraMode(targetMode);
       setShowCamera(true);
       setMode(targetMode === 'TEXTBOOK' ? AppMode.TEXTBOOK_SIMPLIFIER : AppMode.HANDWRITING_HELPER);
