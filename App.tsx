@@ -13,7 +13,7 @@ const App: React.FC = () => {
   // Safe access to process.env for browser environments
   const getApiKey = () => {
     try {
-      return (typeof process !== 'undefined' && process.env?.API_KEY) || '';
+      return (typeof process !== 'undefined' && import.meta.env?.VITE_API_KEY) || '';
     } catch {
       return '';
     }
