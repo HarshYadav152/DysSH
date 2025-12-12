@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Luminary - Learning Companion</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&family=Lexend:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['Lexend', 'sans-serif'], // Lexend is designed for reading proficiency
+              handwriting: ['Comic Neue', 'cursive'],
+            },
+            colors: {
+              luminary: {
+                50: '#fdf8f6', // Warm paper
+                100: '#f2e8e5',
+                200: '#eaddd7',
+                500: '#8b5cf6', // Soft purple
+                600: '#7c3aed',
+                900: '#4c1d95',
+              },
+              ink: '#1e293b', // Soft black for text
+            }
+          }
+        }
+      }
+    </script>
+    <style>
+      body {
+        background-color: #fdf8f6; /* Warm paper color reduces glare */
+        color: #1e293b;
+      }
+      /* Custom scrollbar for better visibility */
+      ::-webkit-scrollbar {
+        width: 12px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #f1f1f1;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #c4b5fd;
+        border-radius: 6px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #a78bfa;
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react/": "https://esm.sh/react@^19.2.3/",
+    "react": "https://esm.sh/react@^19.2.3",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
+    "@google/genai": "https://esm.sh/@google/genai@^1.33.0",
+    "lucide-react": "https://esm.sh/lucide-react@^0.561.0"
+  }
+}
+</script>
+</head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>

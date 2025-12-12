@@ -1,0 +1,8 @@
+{
+  "name": "Copy of Luminary",
+  "description": "An empathetic AI learning companion for students with dyslexia and ADHD, featuring real-time reading coaching and textbook simplification.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ]
+}
