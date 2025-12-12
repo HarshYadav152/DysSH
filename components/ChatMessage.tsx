@@ -29,17 +29,17 @@ const ChatMessage: React.FC<Props> = ({ message }) => {
 
   return (
     <div className={`flex w-full mb-6 ${isUser ? 'justify-end' : 'justify-start'}`}>
-      <div className={`flex max-w-[90%] md:max-w-[80%] ${isUser ? 'flex-row-reverse' : 'flex-row'}`}>
+      <div className={`flex max-w-[90%] md:max-w-2xl ${isUser ? 'flex-row-reverse' : 'flex-row'}`}>
         
         {/* Avatar */}
-        <div className={`flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center ${isUser ? 'bg-luminary-200 text-luminary-900 ml-3' : 'bg-luminary-500 text-white mr-3'}`}>
+        <div className={`flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center shadow-sm ${isUser ? 'bg-luminary-200 text-luminary-900 ml-3' : 'bg-luminary-500 text-white mr-3'}`}>
           {isUser ? <User size={20} /> : <Sparkles size={20} />}
         </div>
 
         {/* Bubble */}
         <div className={`p-4 rounded-2xl shadow-sm text-lg leading-relaxed ${
           isUser 
-            ? 'bg-white text-luminary-900 rounded-tr-none' 
+            ? 'bg-white text-luminary-900 rounded-tr-none border border-luminary-50' 
             : 'bg-white text-ink border border-luminary-100 rounded-tl-none'
         }`}>
           {message.imageUrl && (
